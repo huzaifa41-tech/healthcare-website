@@ -1,0 +1,1699 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HealthConnect | Online Health Services</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f4f9fc;
+            color: #1f2937;
+        }
+
+        /* =========================
+           LOGIN / HOME PAGE
+        ========================== */
+
+        #loginPage {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #dff8f7, #eaf5ff);
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 900px;
+            max-width: 100%;
+            min-height: 550px;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .welcome-side {
+            background: linear-gradient(135deg, #087f8c, #13aaa5);
+            color: white;
+            padding: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome-side .big-icon {
+            font-size: 75px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-side h1 {
+            font-size: 40px;
+            margin-bottom: 18px;
+        }
+
+        .welcome-side h1 span {
+            color: #d7fffd;
+        }
+
+        .welcome-side p {
+            line-height: 1.7;
+            font-size: 17px;
+            color: #e5ffff;
+        }
+
+        .login-side {
+            padding: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-side h2 {
+            font-size: 32px;
+            color: #12343b;
+            margin-bottom: 10px;
+        }
+
+        .login-side .subtitle {
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .login-side label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .login-side input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .login-side input:focus {
+            border-color: #0b9b9b;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #0b9b9b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #087f8c;
+        }
+
+        #loginError {
+            color: #d63031;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        /* =========================
+           MAIN WEBSITE
+        ========================== */
+
+        #mainWebsite {
+            display: none;
+        }
+
+        nav {
+            width: 100%;
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            color: #087f8c;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #16a085;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+
+        nav ul li a:hover {
+            color: #087f8c;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #e74c3c;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 70px 7%;
+            background: linear-gradient(135deg, #e6f9f8, #f4fbff);
+        }
+
+        .hero-text {
+            width: 55%;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            line-height: 1.15;
+            color: #12343b;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span {
+            color: #0b9b9b;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            background: #0b9b9b;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #087f8c;
+        }
+
+        .hero-icon {
+            width: 35%;
+            text-align: center;
+            font-size: 170px;
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 70px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+            color: #12343b;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #666;
+        }
+
+        /* SERVICES */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+        }
+
+        .card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            color: #12343b;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* HEALTH TOOLS */
+
+        #tools {
+            background: #eaf8f8;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .tool {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .tool h3 {
+            color: #087f8c;
+            margin-bottom: 10px;
+            font-size: 23px;
+        }
+
+        .tool p {
+            color: #666;
+            margin-bottom: 18px;
+        }
+
+        .tool input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 12px;
+            background: #edfafa;
+            border-radius: 7px;
+            font-weight: bold;
+            color: #087f8c;
+        }
+
+        /* SYMPTOMS */
+
+        .symptoms {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .symptoms label {
+            background: #f4f9fc;
+            padding: 12px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .symptoms input {
+            width: auto !important;
+        }
+
+        /* TIPS */
+
+        .tips {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .tip {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .tip h3 {
+            margin: 10px 0;
+        }
+
+        .tip p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* EMERGENCY */
+
+        .emergency {
+            background: #fff0f0;
+            text-align: center;
+            border-top: 3px solid #e74c3c;
+            border-bottom: 3px solid #e74c3c;
+        }
+
+        .emergency h2 {
+            color: #c0392b;
+            margin-bottom: 15px;
+        }
+
+        .emergency p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .emergency-btn {
+            background: #e74c3c;
+        }
+
+        /* ABOUT */
+
+        .about {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 17px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #12343b;
+            color: white;
+            text-align: center;
+            padding: 30px 7%;
+        }
+
+        footer p {
+            margin: 7px 0;
+            color: #d5e7e9;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            .login-container {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-side {
+                padding: 35px;
+            }
+
+            .login-side {
+                padding: 35px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                width: 100%;
+            }
+
+            .hero-text h1 {
+                font-size: 38px;
+            }
+
+            .hero-icon {
+                width: 100%;
+                margin-top: 30px;
+                font-size: 100px;
+            }
+
+            .cards,
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tips {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            section {
+                padding: 50px 5%;
+            }
+
+            .tips {
+                grid-template-columns: 1fr;
+            }
+
+            .symptoms {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN / HOME PAGE
+===================================================== -->
+
+<div id="loginPage">
+
+    <div class="login-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="welcome-side">
+
+            <div class="big-icon">🩺</div>
+
+            <h1>
+                Welcome to
+                <span>HealthConnect</span>
+            </h1>
+
+            <p>
+                Helping Communities Access Online Health Services.
+                Access health information, basic health-check tools
+                and digital healthcare resources in one place.
+            </p>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="login-side">
+
+            <h2>Get Started</h2>
+
+            <p class="subtitle">
+                Enter your name to access HealthConnect.
+            </p>
+
+            <label for="userName">Your Name</label>
+
+            <input
+                type="text"
+                id="userName"
+                placeholder="Enter your name"
+            >
+
+            <label for="userEmail">Email Address</label>
+
+            <input
+                type="email"
+                id="userEmail"
+                placeholder="Enter your email"
+            >
+
+            <button
+                class="login-btn"
+                onclick="loginUser()"
+            >
+                Login to HealthConnect
+            </button>
+
+            <p id="loginError"></p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN WEBSITE
+===================================================== -->
+
+<div id="mainWebsite">
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            Health<span>Connect</span> 🩺
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="#home">Home</a>
+            </li>
+
+            <li>
+                <a href="#services">Services</a>
+            </li>
+
+            <li>
+                <a href="#tools">Health Check</a>
+            </li>
+
+            <li>
+                <a href="#tips">Health Tips</a>
+            </li>
+
+            <li>
+                <a href="#about">About</a>
+            </li>
+
+        </ul>
+
+        <button
+            class="logout-btn"
+            onclick="logoutUser()"
+        >
+            Logout
+        </button>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-text">
+
+            <h1>
+                Hello,
+                <span id="welcomeName">User</span>!
+            </h1>
+
+            <h1>
+                Your Health,
+                <span>Our Priority.</span>
+            </h1>
+
+            <p>
+                HealthConnect helps communities access online
+                health information, digital healthcare resources
+                and simple health-check tools.
+            </p>
+
+            <a
+                href="#tools"
+                class="btn"
+            >
+                Check Your Health
+            </a>
+
+        </div>
+
+
+        <div class="hero-icon">
+            🏥
+        </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section id="services">
+
+        <div class="section-title">
+
+            <h2>Our Health Services</h2>
+
+            <p>
+                Simple digital resources for the community
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="icon">
+                    👨‍⚕️
+                </div>
+
+                <h3>
+                    Online Consultation
+                </h3>
+
+                <p>
+                    Learn how online doctor consultations and
+                    telehealth services can help people access care.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">
+                    🏥
+                </div>
+
+                <h3>
+                    Health Resources
+                </h3>
+
+                <p>
+                    Access useful information about common health
+                    conditions and preventive healthcare.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">
+                    📱
+                </div>
+
+                <h3>
+                    Digital Healthcare
+                </h3>
+
+                <p>
+                    Learn how digital tools can make healthcare
+                    information more accessible.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- HEALTH CHECK TOOLS -->
+
+    <section id="tools">
+
+        <div class="section-title">
+
+            <h2>
+                Health Check Tools
+            </h2>
+
+            <p>
+                These tools provide general information and are not
+                a substitute for professional medical advice.
+            </p>
+
+        </div>
+
+
+        <div class="tool-grid">
+
+
+            <!-- BMI -->
+
+            <div class="tool">
+
+                <h3>
+                    ❤️ BMI Calculator
+                </h3>
+
+                <p>
+                    Enter your height and weight.
+                </p>
+
+                <input
+                    type="number"
+                    id="height"
+                    placeholder="Height in cm"
+                >
+
+                <input
+                    type="number"
+                    id="weight"
+                    placeholder="Weight in kg"
+                >
+
+                <button
+                    class="btn"
+                    onclick="calculateBMI()"
+                >
+                    Calculate BMI
+                </button>
+
+                <div
+                    class="result"
+                    id="bmiResult"
+                ></div>
+
+            </div>
+
+
+
+            <!-- BLOOD PRESSURE -->
+
+            <div class="tool">
+
+                <h3>
+                    🩸 Blood Pressure Guide
+                </h3>
+
+                <p>
+                    Enter your blood pressure reading.
+                </p>
+
+                <input
+                    type="number"
+                    id="systolic"
+                    placeholder="Systolic e.g. 120"
+                >
+
+                <input
+                    type="number"
+                    id="diastolic"
+                    placeholder="Diastolic e.g. 80"
+                >
+
+                <button
+                    class="btn"
+                    onclick="checkBP()"
+                >
+                    Check Reading
+                </button>
+
+                <div
+                    class="result"
+                    id="bpResult"
+                ></div>
+
+            </div>
+
+
+
+            <!-- HEART RATE -->
+
+            <div class="tool">
+
+                <h3>
+                    🫀 Heart Rate Guide
+                </h3>
+
+                <p>
+                    Enter your resting pulse rate.
+                </p>
+
+                <input
+                    type="number"
+                    id="heartRate"
+                    placeholder="Beats per minute"
+                >
+
+                <button
+                    class="btn"
+                    onclick="checkHeartRate()"
+                >
+                    Check Heart Rate
+                </button>
+
+                <div
+                    class="result"
+                    id="heartResult"
+                ></div>
+
+            </div>
+
+
+
+            <!-- TEMPERATURE -->
+
+            <div class="tool">
+
+                <h3>
+                    🌡️ Temperature Guide
+                </h3>
+
+                <p>
+                    Enter temperature in Celsius.
+                </p>
+
+                <input
+                    type="number"
+                    step="0.1"
+                    id="temperature"
+                    placeholder="Temperature °C"
+                >
+
+                <button
+                    class="btn"
+                    onclick="checkTemperature()"
+                >
+                    Check Temperature
+                </button>
+
+                <div
+                    class="result"
+                    id="tempResult"
+                ></div>
+
+            </div>
+
+
+
+            <!-- SYMPTOM CHECKER -->
+
+            <div
+                class="tool"
+                style="grid-column: 1 / -1;"
+            >
+
+                <h3>
+                    🧠 Basic Symptom Checker
+                </h3>
+
+                <p>
+                    Select symptoms for general guidance.
+                    This tool does not diagnose medical conditions.
+                </p>
+
+
+                <div class="symptoms">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="fever"
+                        >
+                        Fever
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="cough"
+                        >
+                        Cough
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="headache"
+                        >
+                        Headache
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="sore"
+                        >
+                        Sore Throat
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="fatigue"
+                        >
+                        Fatigue
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="breathing"
+                        >
+                        Difficulty Breathing
+                    </label>
+
+                </div>
+
+
+                <button
+                    class="btn"
+                    onclick="checkSymptoms()"
+                >
+                    Check Symptoms
+                </button>
+
+
+                <div
+                    class="result"
+                    id="symptomResult"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- HEALTH EDUCATION -->
+
+    <section id="tips">
+
+        <div class="section-title">
+
+            <h2>
+                Health Education
+            </h2>
+
+            <p>
+                Simple habits that support overall wellbeing
+            </p>
+
+        </div>
+
+
+        <div class="tips">
+
+
+            <div class="tip">
+
+                <div style="font-size:40px;">
+                    🥗
+                </div>
+
+                <h3>
+                    Healthy Food
+                </h3>
+
+                <p>
+                    Include a variety of fruits, vegetables,
+                    whole grains and nutritious foods.
+                </p>
+
+            </div>
+
+
+            <div class="tip">
+
+                <div style="font-size:40px;">
+                    🏃
+                </div>
+
+                <h3>
+                    Stay Active
+                </h3>
+
+                <p>
+                    Regular physical activity can support
+                    overall health and wellbeing.
+                </p>
+
+            </div>
+
+
+            <div class="tip">
+
+                <div style="font-size:40px;">
+                    💧
+                </div>
+
+                <h3>
+                    Stay Hydrated
+                </h3>
+
+                <p>
+                    Drink enough fluids according to your
+                    individual needs and environment.
+                </p>
+
+            </div>
+
+
+            <div class="tip">
+
+                <div style="font-size:40px;">
+                    😴
+                </div>
+
+                <h3>
+                    Good Sleep
+                </h3>
+
+                <p>
+                    Maintain a regular sleep routine and
+                    create a comfortable sleeping environment.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- EMERGENCY -->
+
+    <section class="emergency">
+
+        <h2>
+            🚨 Emergency Information
+        </h2>
+
+        <p>
+            If someone has severe difficulty breathing,
+            severe chest pain, loss of consciousness,
+            or another medical emergency, seek urgent
+            professional medical care.
+        </p>
+
+        <button
+            class="btn emergency-btn"
+            onclick="alert('For emergencies, contact your local emergency service or go to the nearest emergency department.')"
+        >
+            Emergency Help
+        </button>
+
+    </section>
+
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="section-title">
+
+            <h2>
+                About HealthConnect
+            </h2>
+
+        </div>
+
+
+        <div class="about">
+
+            <p>
+                HealthConnect is a college CEP project designed
+                around the idea of helping communities access
+                online health services. The platform brings
+                basic health information, educational resources
+                and simple health-check tools together in one
+                easy-to-use website.
+            </p>
+
+            <br>
+
+            <p>
+                The goal is to improve awareness of digital
+                healthcare resources and encourage people to
+                seek appropriate professional care when needed.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>
+            HealthConnect 🩺
+        </h3>
+
+        <p>
+            Helping Communities Access Online Health Services
+        </p>
+
+        <p>
+            © 2026 HealthConnect | College CEP Project
+        </p>
+
+    </footer>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function loginUser() {
+
+    let name =
+        document.getElementById("userName").value.trim();
+
+    let email =
+        document.getElementById("userEmail").value.trim();
+
+    let error =
+        document.getElementById("loginError");
+
+
+    if (name === "") {
+
+        error.innerHTML =
+            "⚠️ Please enter your name.";
+
+        return;
+    }
+
+
+    if (email === "") {
+
+        error.innerHTML =
+            "⚠️ Please enter your email address.";
+
+        return;
+    }
+
+
+    if (!email.includes("@")) {
+
+        error.innerHTML =
+            "⚠️ Please enter a valid email address.";
+
+        return;
+    }
+
+
+    /*
+       Save name in browser
+       so the website can welcome the user.
+    */
+
+    localStorage.setItem(
+        "healthUserName",
+        name
+    );
+
+
+    document.getElementById("welcomeName").innerHTML =
+        name;
+
+
+    document.getElementById("loginPage").style.display =
+        "none";
+
+
+    document.getElementById("mainWebsite").style.display =
+        "block";
+
+
+    window.scrollTo(0, 0);
+
+}
+
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutUser() {
+
+    localStorage.removeItem(
+        "healthUserName"
+    );
+
+    document.getElementById("mainWebsite").style.display =
+        "none";
+
+    document.getElementById("loginPage").style.display =
+        "flex";
+
+    document.getElementById("userName").value =
+        "";
+
+    document.getElementById("userEmail").value =
+        "";
+
+}
+
+
+
+/* =========================
+   BMI
+========================= */
+
+function calculateBMI() {
+
+    let height =
+        parseFloat(
+            document.getElementById("height").value
+        );
+
+    let weight =
+        parseFloat(
+            document.getElementById("weight").value
+        );
+
+    let result =
+        document.getElementById("bmiResult");
+
+
+    if (
+        !height ||
+        !weight ||
+        height <= 0 ||
+        weight <= 0
+    ) {
+
+        result.innerHTML =
+            "Please enter valid height and weight.";
+
+        return;
+    }
+
+
+    let heightMeter =
+        height / 100;
+
+
+    let bmi =
+        weight /
+        (heightMeter * heightMeter);
+
+
+    bmi =
+        bmi.toFixed(1);
+
+
+    let category;
+
+
+    if (bmi < 18.5) {
+
+        category =
+            "Below the commonly used adult BMI range.";
+
+    }
+
+    else if (bmi < 25) {
+
+        category =
+            "Within the commonly used adult BMI range.";
+
+    }
+
+    else if (bmi < 30) {
+
+        category =
+            "Above the commonly used adult BMI range.";
+
+    }
+
+    else {
+
+        category =
+            "In the obesity range by standard adult BMI categories.";
+
+    }
+
+
+    result.innerHTML =
+        "Your BMI: " +
+        bmi +
+        "<br>" +
+        category;
+
+}
+
+
+
+/* =========================
+   BLOOD PRESSURE
+========================= */
+
+function checkBP() {
+
+    let systolic =
+        parseInt(
+            document.getElementById("systolic").value
+        );
+
+    let diastolic =
+        parseInt(
+            document.getElementById("diastolic").value
+        );
+
+    let result =
+        document.getElementById("bpResult");
+
+
+    if (!systolic || !diastolic) {
+
+        result.innerHTML =
+            "Please enter both blood pressure values.";
+
+        return;
+    }
+
+
+    if (
+        systolic < 90 ||
+        diastolic < 60
+    ) {
+
+        result.innerHTML =
+            "This reading may be low. If you feel unwell, seek medical advice.";
+
+    }
+
+    else if (
+        systolic < 120 &&
+        diastolic < 80
+    ) {
+
+        result.innerHTML =
+            "This reading is in the normal range for adults.";
+
+    }
+
+    else if (
+        systolic < 130 &&
+        diastolic < 80
+    ) {
+
+        result.innerHTML =
+            "This reading is elevated. Consider discussing repeated readings with a healthcare professional.";
+
+    }
+
+    else {
+
+        result.innerHTML =
+            "This reading is above the normal range. Repeated high readings should be discussed with a healthcare professional.";
+
+    }
+
+}
+
+
+
+/* =========================
+   HEART RATE
+========================= */
+
+function checkHeartRate() {
+
+    let heartRate =
+        parseInt(
+            document.getElementById("heartRate").value
+        );
+
+    let result =
+        document.getElementById("heartResult");
+
+
+    if (
+        !heartRate ||
+        heartRate <= 0
+    ) {
+
+        result.innerHTML =
+            "Please enter a valid heart rate.";
+
+        return;
+    }
+
+
+    if (heartRate < 60) {
+
+        result.innerHTML =
+            "Your resting heart rate is below 60 BPM. This can occur normally in some people, but symptoms should be discussed with a healthcare professional.";
+
+    }
+
+    else if (heartRate <= 100) {
+
+        result.innerHTML =
+            "Your resting heart rate is within the commonly used adult range of 60–100 BPM.";
+
+    }
+
+    else {
+
+        result.innerHTML =
+            "Your resting heart rate is above the commonly used adult range. If this persists or you have symptoms, seek medical advice.";
+
+    }
+
+}
+
+
+
+/* =========================
+   TEMPERATURE
+========================= */
+
+function checkTemperature() {
+
+    let temperature =
+        parseFloat(
+            document.getElementById("temperature").value
+        );
+
+    let result =
+        document.getElementById("tempResult");
+
+
+    if (isNaN(temperature)) {
+
+        result.innerHTML =
+            "Please enter a valid temperature.";
+
+        return;
+    }
+
+
+    if (temperature < 35) {
+
+        result.innerHTML =
+            "Your temperature is unusually low. If you feel unwell, seek medical advice.";
+
+    }
+
+    else if (temperature < 38) {
+
+        result.innerHTML =
+            "This is below the commonly used fever threshold.";
+
+    }
+
+    else {
+
+        result.innerHTML =
+            "This temperature is commonly considered a fever. Monitor your symptoms and consider medical advice, especially if it persists or is severe.";
+
+    }
+
+}
+
+
+
+/* =========================
+   SYMPTOM CHECKER
+========================= */
+
+function checkSymptoms() {
+
+    let selected =
+        document.querySelectorAll(
+            '.symptoms input[type="checkbox"]:checked'
+        );
+
+
+    let result =
+        document.getElementById("symptomResult");
+
+
+    if (selected.length === 0) {
+
+        result.innerHTML =
+            "Please select at least one symptom.";
+
+        return;
+    }
+
+
+    let symptoms = [];
+
+
+    selected.forEach(
+        function(item) {
+
+            symptoms.push(item.value);
+
+        }
+    );
+
+
+    if (
+        symptoms.includes("breathing")
+    ) {
+
+        result.innerHTML =
+            "Difficulty breathing can be serious. Seek urgent professional medical care, especially if breathing difficulty is severe or sudden.";
+
+        return;
+    }
+
+
+    if (
+        symptoms.includes("fever") &&
+        symptoms.includes("cough") &&
+        symptoms.includes("sore")
+    ) {
+
+        result.innerHTML =
+            "Fever, cough and sore throat can occur with several respiratory illnesses. Rest, stay hydrated and consider speaking with a healthcare professional if symptoms are severe, worsening or persistent.";
+
+    }
+
+    else if (
+        symptoms.includes("headache") &&
+        symptoms.includes("fatigue")
+    ) {
+
+        result.innerHTML =
+            "Headache and fatigue can have many possible causes. Rest and hydration may help, but seek professional advice if symptoms are severe, persistent or unusual for you.";
+
+    }
+
+    else {
+
+        result.innerHTML =
+            "These symptoms can have many different causes. This tool cannot diagnose a condition. Monitor your symptoms and consider speaking with a healthcare professional if they persist or worsen.";
+
+    }
+
+}
+
+
+
+/* =========================
+   REMEMBER USER
+========================= */
+
+window.onload = function() {
+
+    let savedName =
+        localStorage.getItem(
+            "healthUserName"
+        );
+
+
+    /*
+       Agar pehle login kiya hai,
+       to directly website open hogi.
+    */
+
+    if (savedName) {
+
+        document.getElementById(
+            "loginPage"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "mainWebsite"
+        ).style.display = "block";
+
+
+        document.getElementById(
+            "welcomeName"
+        ).innerHTML = savedName;
+
+    }
+
+};
+
+</script>
+
+</body>
+</html>
+```
